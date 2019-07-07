@@ -1,0 +1,24 @@
+## mako
+<%! from django.utils.translation import ugettext as _ %>
+Opportunity should not be a problem-- we are bringing the Math Challenge directly to you!
+
+Use the link to activate your account and access actual Math Challenge questions. Note that you will not be able to log back into your account until you have activated it.
+
+% if is_secure:
+https://${ site }/activate/${ key }
+% else:
+http://${ site }/activate/${ key }
+% endif
+
+${_("If you need help, please contact us at {support_email}.").format(
+  support_url=support_url, support_email=support_email
+)}
+
+Take Math Challenge! - with practice and dedication, you’ll overcome the challenge.
+
+The Metrobank - MTAP - DepEd Math Challenge Team
+
+${_("This email message was automatically sent by {lms_url} because someone attempted to create an "
+"account on {platform_name} using this email address.").format(
+  lms_url=lms_url, platform_name=platform_name
+)}
