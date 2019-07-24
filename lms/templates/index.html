@@ -7,40 +7,72 @@ from django.urls import reverse
 
 from openedx.core.djangolib.markup import HTML, Text
 %>
+<style>
+div.banner {
+  background-size: cover; 
+}
+h1.banner {
+  color: white;
+  font-family: : Georgia,Cambria,"Times New Roman",Times,serif;
+  font-size: 50px;
+  position: absolute;
+  top: 25%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  animation: 1s h-banner-slide-up;
+}
+p.banner {
+  color: white;
+  font-family: : Georgia,Cambria,"Times New Roman",Times,serif;
+  font-size: 25px;
+  align: center;
+  position: absolute;
+  left: 50%;
+  top: 32.5%;
+  transform: translate(-50%, -50%);
+  animation: 1s p-banner-slide-up;
+}
+img.banner {
+  max-width: 100%;￼
+  max-height: 100%;
+}
 
+
+
+@keyframes p-banner-slide-up {
+  from {
+    top: 40%; 
+    opacity: 0;
+  }
+
+  to {
+    top: 32.5%;
+    opacity: 1;
+  }
+}
+
+@keyframes h-banner-slide-up {
+  from {
+    top: 32.5%; 
+    opacity: 0;
+  }
+
+  to {
+    top: 25%;
+    opacity: 1;
+  }
+}
+
+
+</style>
+<div>
+  <img class="banner" src="${static.url("images/banner_smaller2.png")}" alt="My Awesome Image"/>
+  <h1 class="banner"> Welcome to Math Challenge! </h1>
+  <p class="banner">by Metrobank-MTAP-DepEd</p> 
+</div>
 <main id="main" aria-label="Content" tabindex="-1">
     <section class="home">
-      <header>
-        <div class="outer-wrapper">
-          <div class="title">
-            <div class="heading-group" align="center">
-              % if homepage_overlay_html:
-                ${homepage_overlay_html | n, decode.utf8}
-              % else:
-                <%include file="index_overlay.html" />
-              % endif
-            </div>
-            % if settings.FEATURES.get('ENABLE_COURSE_DISCOVERY'):
-              <div class="course-search">
-                <form method="get" action="/courses">
-                  <label><span class="sr">${_("Search for a course")}</span>
-                    <input class="search-input" name="search_query" type="text" placeholder="${_("Search for a course")}"></input>
-                  </label>
-                  <button class="search-button" type="submit">
-                    <span class="icon fa fa-search" aria-hidden="true"></span><span class="sr">${_("Search")}</span>
-                  </button>
-                </form>
-              </div>
-            % endif
-
-          </div>
-
-          <%include file="index_promo_video.html" />
-        </div>
-
-      </header>
       <%include file="${courses_list}" />
-
     </section>
 </main>
 
